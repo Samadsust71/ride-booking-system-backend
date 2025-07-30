@@ -3,6 +3,7 @@ import { Server } from "http";
 import mongoose from "mongoose";
 import app from "./app";
 import { envVars } from "./app/config/env.config";
+import { seedSuperAdmin } from "./app/utils/seedSuperAdmin";
 let server: Server;
 const port = envVars.PORT;
 const startServer = async () => {
@@ -18,8 +19,9 @@ const startServer = async () => {
 };
 
 (async () => {
-    await startServer()
-})()
+  await startServer();
+  await seedSuperAdmin();
+})();
 
 // for catching Unhandled promise error
 process.on("unhandledRejection", (err) => {

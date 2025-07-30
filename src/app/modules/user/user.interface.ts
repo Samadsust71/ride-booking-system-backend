@@ -4,27 +4,33 @@ import { Document, Types } from "mongoose";
  * Enum for user roles
  */
 export enum UserRole {
-  ADMIN = "admin",
-  RIDER = "rider",
-  DRIVER = "driver",
+  SUPER_ADMIN = "SUPER_ADMIN",
+  ADMIN = "ADMIN",
+  RIDER = "RIDER",
+  DRIVER = "DRIVER",
 }
 
 /**
  * Enum for account status
  */
 export enum AccountStatus {
-  ACTIVE = "active",
-  BLOCKED = "blocked",
-  SUSPENDED = "suspended",
+  ACTIVE = "ACTIVE",
+  BLOCKED = "BLOCKED",
+  SUSPENDED = "SUSPENDED",
 }
 
 /**
  * Enum for driver approval status
  */
 export enum DriverApprovalStatus {
-  PENDING = "pending",
-  APPROVED = "approved",
-  REJECTED = "rejected",
+  PENDING = "PENDING",
+  APPROVED = "APPROVED",
+  REJECTED = "REJECTED",
+}
+
+export interface IAuthProvider {
+  provider: "google"|"credentials";
+  providerId: string;
 }
 
 /**
@@ -45,8 +51,12 @@ export interface IUser extends Document {
   email: string;
   password: string;
   phone?: string;
+  address?: string;
   role: UserRole;
+  isDeleted?: boolean;
+  isVerified: boolean;
   status: AccountStatus;
+  auths: IAuthProvider[];
   driverInfo?: IDriverInfo;
   createdAt?: Date;
   updatedAt?: Date;
