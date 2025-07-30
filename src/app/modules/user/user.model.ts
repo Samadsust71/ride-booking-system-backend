@@ -2,10 +2,22 @@ import { model, Schema } from "mongoose";
 import {
   AccountStatus,
   DriverApprovalStatus,
+  IAuthProvider,
   IDriverInfo,
   IUser,
   UserRole,
 } from "./user.interface";
+
+const authProviderSchema = new Schema<IAuthProvider>(
+  {
+    provider: { type: String, required: true },
+    providerId: { type: String, required: true },
+  },
+  {
+    versionKey: false,
+    _id: false,
+  }
+);
 
 const driverInfoSchema = new Schema<IDriverInfo>(
   {
@@ -30,6 +42,7 @@ const userSchema = new Schema<IUser>(
     email: { type: String, required: true, unique: true, lowercase: true },
     password: { type: String, required: true },
     phone: { type: String },
+    address: { type: String },
     role: {
       type: String,
       enum: Object.values(UserRole),
@@ -40,8 +53,10 @@ const userSchema = new Schema<IUser>(
       enum: Object.values(AccountStatus),
       default: AccountStatus.ACTIVE,
     },
-
-    driverInfo: { type: driverInfoSchema, required: false },
+    isDeleted: { type: Boolean, default: false },
+    auths: [authProviderSchema],
+    isVerified: { type: Boolean, default: false },
+    driverInfo: { type: driverInfoSchema, required: false }
   },
   { timestamps: true, versionKey: false }
 );

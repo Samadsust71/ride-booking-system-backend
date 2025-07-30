@@ -12,6 +12,12 @@ interface EnvConfig {
   JWT_REFRESH_SECRET: string;
   ACCESS_EXPIRES_IN: string;
   REFRESH_EXPIRES_IN:string;
+
+  // super admin credentials
+  SUPER_ADMIN_EMAIL: string;
+  SUPER_ADMIN_PASSWORD: string;
+  SUPER_ADMIN_PHONE: string;
+  SUPER_ADMIN_ADDRESS:string;
   
 }
 
@@ -26,7 +32,12 @@ const requiredEnvVariables: (keyof EnvConfig)[] = [
   "JWT_ACCESS_SECRET",
   "ACCESS_EXPIRES_IN",
   "JWT_REFRESH_SECRET",
-  "REFRESH_EXPIRES_IN"
+  "REFRESH_EXPIRES_IN",
+  // super admin credentials
+  "SUPER_ADMIN_EMAIL",
+  "SUPER_ADMIN_PASSWORD",
+  "SUPER_ADMIN_PHONE",
+  "SUPER_ADMIN_ADDRESS"
 ];
 
 const loadEnvVariables = (): EnvConfig => {
