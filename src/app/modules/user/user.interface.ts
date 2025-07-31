@@ -49,8 +49,9 @@ export interface IDriverInfo {
 export interface IUser extends Document {
   name: string;
   email: string;
-  password: string;
+  password?: string;
   phone?: string;
+  picture?: string;
   address?: string;
   role: UserRole;
   isDeleted?: boolean;

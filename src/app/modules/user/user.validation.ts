@@ -71,7 +71,7 @@ export const createUserZodSchema = z.object({
       required_error: "Password is required",
       invalid_type_error: "Password must be a string",
     })
-    .min(6, { message: "Password must be at least 6 characters long" }),
+    .min(6, { message: "Password must be at least 6 characters long" }).optional(),
 
   phone: z
     .string({ invalid_type_error: "Phone number must be a string" })
@@ -83,10 +83,7 @@ export const createUserZodSchema = z.object({
   address: z
     .string({ invalid_type_error: "Address must be string" })
     .max(200, { message: "Address cannot exceed 200 characters." })
-    .optional(),
-  role: userRoleEnum.optional(),
-  status: accountStatusEnum.optional(),
-  driverInfo: driverInfoSchema.optional(),
+    .optional()
 });
 
 /**
