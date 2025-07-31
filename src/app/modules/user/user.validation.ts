@@ -1,49 +1,24 @@
 import { z } from "zod";
 import {
   AccountStatus,
-  DriverApprovalStatus,
   UserRole,
 } from "./user.interface";
 
 /**
  * Zod enum conversion helper
  */
-const userRoleEnum = z.enum([UserRole.ADMIN, UserRole.RIDER, UserRole.DRIVER], {
+const userRoleEnum = z.enum([UserRole.SUPER_ADMIN,UserRole.ADMIN, UserRole.RIDER, UserRole.DRIVER], {
   required_error: "Role is required",
   invalid_type_error: "Role must be one of admin, rider, or driver",
 });
 
 const accountStatusEnum = z.enum(
-  [AccountStatus.ACTIVE, AccountStatus.BLOCKED, AccountStatus.SUSPENDED],
+  [AccountStatus.ACTIVE,AccountStatus.INACTIVE, AccountStatus.BLOCKED, AccountStatus.SUSPENDED],
   {
     invalid_type_error: "Invalid account status",
   }
 );
 
-const driverApprovalStatusEnum = z.enum(
-  [
-    DriverApprovalStatus.PENDING,
-    DriverApprovalStatus.APPROVED,
-    DriverApprovalStatus.REJECTED,
-  ],
-  { invalid_type_error: "Invalid driver approval status" }
-);
-
-/**
- * Driver Info Schema (for validation)
- */
-const driverInfoSchema = z.object({
-  approvalStatus: driverApprovalStatusEnum.optional(),
-  isOnline: z
-    .boolean({ invalid_type_error: "isOnline must be a boolean" })
-    .optional(),
-  vehicleId: z
-    .string({ invalid_type_error: "vehicleId must be a string" })
-    .optional(), // MongoDB ObjectId as string
-  totalEarnings: z
-    .number({ invalid_type_error: "totalEarnings must be a number" })
-    .optional(),
-});
 
 /**
  * Create User Validation Schema
@@ -118,8 +93,8 @@ export const updateUserZodSchema = z.object({
     .string({ invalid_type_error: "Address must be string" })
     .max(200, { message: "Address cannot exceed 200 characters." })
     .optional(),
+  picture:z.string({ invalid_type_error:"Picture must be a string" }).optional(), 
 
   role: userRoleEnum.optional(),
   status: accountStatusEnum.optional(),
-  driverInfo: driverInfoSchema.optional(),
 });

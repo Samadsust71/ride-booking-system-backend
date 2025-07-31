@@ -15,32 +15,16 @@ export enum UserRole {
  */
 export enum AccountStatus {
   ACTIVE = "ACTIVE",
+  INACTIVE = "INACTIVE",
   BLOCKED = "BLOCKED",
   SUSPENDED = "SUSPENDED",
 }
 
-/**
- * Enum for driver approval status
- */
-export enum DriverApprovalStatus {
-  PENDING = "PENDING",
-  APPROVED = "APPROVED",
-  REJECTED = "REJECTED",
-}
+ 
 
 export interface IAuthProvider {
   provider: "google"|"credentials";
   providerId: string;
-}
-
-/**
- * Driver-specific info
- */
-export interface IDriverInfo {
-  approvalStatus: DriverApprovalStatus;
-  isOnline: boolean;
-  vehicleId?: Types.ObjectId;
-  totalEarnings: number;
 }
 
 /**
@@ -58,7 +42,7 @@ export interface IUser extends Document {
   isVerified: boolean;
   status: AccountStatus;
   auths: IAuthProvider[];
-  driverInfo?: IDriverInfo;
+  rides?: Types.ObjectId[];
   createdAt?: Date;
   updatedAt?: Date;
 }
