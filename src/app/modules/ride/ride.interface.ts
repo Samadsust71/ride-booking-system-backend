@@ -42,6 +42,9 @@ export interface IRide {
 
   isPaid: boolean;
 
+  rating?: number;
+  feedback?: string;
+
   createdAt?: Date;
   updatedAt?: Date;
 }

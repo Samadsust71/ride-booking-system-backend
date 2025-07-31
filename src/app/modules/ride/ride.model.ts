@@ -30,8 +30,10 @@ const rideSchema = new Schema(
     },
     farePerKm: {
       type: Number,
-      default: perKmRate, 
+      default: perKmRate,
     },
+    rating: { type: Number, min: 1, max: 5 },
+    feedback: { type: String },
     timestamps: {
       requestedAt: { type: Date, default: Date.now },
       acceptedAt: { type: Date },

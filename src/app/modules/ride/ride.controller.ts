@@ -76,10 +76,27 @@ const getSingleRide = catchAsync(
     });
   }
 );
+const feedbackRide= catchAsync(
+  async (req: Request, res: Response, next: NextFunction) => {
+    const rideId = req.params.id;
+    const rider = req.user;
+    const {userId: riderId} = rider as JwtPayload
+    const {rating,feedback} = req.body;
 
+    const result = await RideService.feedbackRide(rideId, riderId, rating,feedback);
+
+    sendResponse(res, {
+      success: true,
+      statusCode: httpStatus.OK,
+      message: 'Feedback submitted successfully',
+      data: result,
+    });
+  }
+)
 export const RideController = {
   createRide,
   cancelRide,
   getMyRides,
   getSingleRide,
+  feedbackRide
 };

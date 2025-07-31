@@ -145,9 +145,62 @@ const getSingleRide = async (rideId: string, riderId: string) => {
   return ride;
 };
 
+const feedbackRide = async (rideId: string, riderId: string, rating: number, feedback: string) => {
+  if (!isValidObjectId(rideId)) {
+    throw new AppError(httpStatus.BAD_REQUEST, "Invalid ride ID");
+  }
+
+  const ride = await Ride.findById(rideId);
+
+  if (!ride) {
+    throw new AppError(httpStatus.NOT_FOUND, "Ride not found");
+  }
+
+  if (ride.rider.toString() !== riderId) {
+    throw new AppError(
+      httpStatus.FORBIDDEN,
+      "You are not authorized to provide feedback for this ride"
+    );
+  }
+
+  if (ride.status !== RideStatus.COMPLETED) {
+    throw new AppError(
+      httpStatus.BAD_REQUEST,
+      "Feedback can only be provided for completed rides"
+    );
+  }
+  
+  if (rating < 1 || rating > 5) {
+    throw new AppError(
+      httpStatus.BAD_REQUEST,
+      "Rating must be between 1 and 5"
+    );
+  }
+  if (!feedback || feedback.trim() === "") {
+    throw new AppError(
+      httpStatus.BAD_REQUEST,
+      "Feedback cannot be empty"
+    );
+  }
+  if (ride.rating !== undefined || ride.feedback !== undefined) {
+    throw new AppError(
+      httpStatus.BAD_REQUEST,
+      "Feedback has already been submitted for this ride"
+    );
+  }
+
+  ride.rating = rating;
+  ride.feedback = feedback;
+
+  await ride.save();
+
+  return ride;
+};
+
 export const RideService = {
   createRide,
   cancelRide,
   getMyRides,
   getSingleRide,
+  feedbackRide,
 };
