@@ -40,8 +40,9 @@ const userSchema = new Schema<IUser>(
   {
     name: { type: String, required: true, trim: true },
     email: { type: String, required: true, unique: true, lowercase: true },
-    password: { type: String, required: true },
+    password: { type: String },
     phone: { type: String },
+    picture: { type: String },
     address: { type: String },
     role: {
       type: String,
