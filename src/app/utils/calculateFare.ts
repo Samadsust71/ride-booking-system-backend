@@ -1,3 +1,5 @@
+import { perKmRate } from "../constants";
+
 export interface Coordinates {
   lat: number;
   lng: number;
@@ -18,12 +20,11 @@ export const calculateDistanceInKm = (from: Coordinates, to: Coordinates): numbe
       Math.sin(dLng / 2);
 
   const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-  return R * c;
+  return parseFloat((R * c).toFixed(2));
 };
 
 export const calculateFare = (from: Coordinates, to: Coordinates): number => {
-  const distanceKm = calculateDistanceInKm(from, to);
-  const perKmRate = 20; 
+  const distanceKm = calculateDistanceInKm(from, to)
   const baseFare = 0; 
   return parseFloat((baseFare + distanceKm * perKmRate).toFixed(2));
 };

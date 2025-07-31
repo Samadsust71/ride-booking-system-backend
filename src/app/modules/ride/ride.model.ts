@@ -1,5 +1,6 @@
 import { Schema, model, Types } from "mongoose";
 import { IRide, RideStatus } from "./ride.interface";
+import { perKmRate } from "../../constants";
 
 const rideSchema = new Schema(
   {
@@ -26,6 +27,10 @@ const rideSchema = new Schema(
     distance: {
       type: Number,
       required: true,
+    },
+    farePerKm: {
+      type: Number,
+      default: perKmRate, 
     },
     timestamps: {
       requestedAt: { type: Date, default: Date.now },

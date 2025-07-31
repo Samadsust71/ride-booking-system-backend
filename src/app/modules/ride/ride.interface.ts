@@ -29,6 +29,7 @@ export interface IRide {
   status: RideStatus;
 
   fare: number;
+  farePerKm?: number; 
 
   timestamps: {
     requestedAt: Date;

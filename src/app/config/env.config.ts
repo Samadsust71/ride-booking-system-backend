@@ -21,6 +21,11 @@ interface EnvConfig {
   GOOGLE_CALLBACK_URL:string;
   EXPRESS_SESSION_SECRET:string;
   FRONTEND_URL:string;
+  
+  // google maps
+  GOOGLE_MAPS_URL:string;
+  GOOGLE_MAPS_USER_AGENT:string;
+
   // SSL
   SSL_STORE_ID:string;
   SSL_STORE_PASS:string;
@@ -73,6 +78,9 @@ const requiredEnvVariables: (keyof EnvConfig)[] = [
   "GOOGLE_CALLBACK_URL",
   "EXPRESS_SESSION_SECRET",
   "FRONTEND_URL",
+  // google maps
+  "GOOGLE_MAPS_URL",
+  "GOOGLE_MAPS_USER_AGENT",
   // SSL
   "SSL_STORE_ID",
   "SSL_STORE_PASS",
