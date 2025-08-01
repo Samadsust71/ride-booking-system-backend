@@ -13,6 +13,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.getReadableAddressFromCoordinates = exports.getCoordinatesFromAddress = void 0;
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 const axios_1 = __importDefault(require("axios"));
 const AppError_1 = __importDefault(require("../errorHelpers/AppError"));
@@ -31,7 +32,7 @@ const getCoordinatesFromAddress = (address) => __awaiter(void 0, void 0, void 0,
         };
     }
     catch (error) {
-        throw new AppError_1.default(400, `Error fetching coordinates: ${error.message}`);
+        throw new AppError_1.default(400, `Failed to get coordinates. Are you sure it's a valid address?`);
     }
 });
 exports.getCoordinatesFromAddress = getCoordinatesFromAddress;
@@ -46,7 +47,7 @@ const getReadableAddressFromCoordinates = (lat, lng) => __awaiter(void 0, void 0
         return data.display_name;
     }
     catch (error) {
-        throw new AppError_1.default(400, `Error fetching address: ${error.message}`);
+        throw new AppError_1.default(400, `Failed to get address. Are you sure it's a valid address?`);
     }
 });
 exports.getReadableAddressFromCoordinates = getReadableAddressFromCoordinates;

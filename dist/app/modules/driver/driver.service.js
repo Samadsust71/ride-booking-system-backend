@@ -26,7 +26,7 @@ const applyToBeDriver = (userId, payload) => __awaiter(void 0, void 0, void 0, f
         throw new AppError_1.default(http_status_codes_1.default.BAD_REQUEST, "You have already applied or are already a driver.");
     }
     if (!payload.drivingLocation) {
-        throw new AppError_1.default(http_status_codes_1.default.BAD_REQUEST, "Driving Location is required");
+        throw new AppError_1.default(http_status_codes_1.default.BAD_REQUEST, "'drivingLocation' is required");
     }
     const coordinates = yield (0, getCoordinatesFromAddress_1.getCoordinatesFromAddress)(payload.drivingLocation);
     const newDriver = yield driver_model_1.Driver.create({

@@ -37,14 +37,13 @@ const updateUser = async (userId: string, payload: Partial<IUser>, decodedToken:
     if (!ifUserExist) {
         throw new AppError(httpStatus.NOT_FOUND, "User Not Found")
     }
-
+   
+    if (decodedToken.role === UserRole.ADMIN && ifUserExist.role === UserRole.SUPER_ADMIN) {
+        throw new AppError(httpStatus.FORBIDDEN, "You are not authorized")
+    }
 
     if (payload.role) {
         if (decodedToken.role === UserRole.RIDER || decodedToken.role === UserRole.DRIVER) {
-            throw new AppError(httpStatus.FORBIDDEN, "You are not authorized");
-        }
-
-        if (payload.role === UserRole.SUPER_ADMIN && decodedToken.role === UserRole.ADMIN) {
             throw new AppError(httpStatus.FORBIDDEN, "You are not authorized");
         }
     }

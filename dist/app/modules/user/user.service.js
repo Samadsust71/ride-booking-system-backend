@@ -49,11 +49,11 @@ const updateUser = (userId, payload, decodedToken) => __awaiter(void 0, void 0, 
     if (!ifUserExist) {
         throw new AppError_1.default(http_status_codes_1.default.NOT_FOUND, "User Not Found");
     }
+    if (decodedToken.role === user_interface_1.UserRole.ADMIN && ifUserExist.role === user_interface_1.UserRole.SUPER_ADMIN) {
+        throw new AppError_1.default(http_status_codes_1.default.FORBIDDEN, "You are not authorized");
+    }
     if (payload.role) {
         if (decodedToken.role === user_interface_1.UserRole.RIDER || decodedToken.role === user_interface_1.UserRole.DRIVER) {
-            throw new AppError_1.default(http_status_codes_1.default.FORBIDDEN, "You are not authorized");
-        }
-        if (payload.role === user_interface_1.UserRole.SUPER_ADMIN && decodedToken.role === user_interface_1.UserRole.ADMIN) {
             throw new AppError_1.default(http_status_codes_1.default.FORBIDDEN, "You are not authorized");
         }
     }

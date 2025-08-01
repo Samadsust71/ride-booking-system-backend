@@ -22,12 +22,12 @@ const modulesRoutes = [
   },
   {
     path: "/drivers",
-    route:DriverRoutes
+    route: DriverRoutes,
   },
   {
-        path: "/admin",
-        route: AdminRoutes
-    }
+    path: "/admin",
+    route: AdminRoutes,
+  },
 ];
 
 modulesRoutes.forEach((route) => {

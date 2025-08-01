@@ -23,12 +23,12 @@ const modulesRoutes = [
     },
     {
         path: "/drivers",
-        route: driver_route_1.DriverRoutes
+        route: driver_route_1.DriverRoutes,
     },
     {
         path: "/admin",
-        route: admin_route_1.AdminRoutes
-    }
+        route: admin_route_1.AdminRoutes,
+    },
 ];
 modulesRoutes.forEach((route) => {
     exports.router.use(route.path, route.route);

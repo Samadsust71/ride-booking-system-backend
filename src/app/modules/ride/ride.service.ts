@@ -247,10 +247,10 @@ export const findNearbyDrivers = async (payload: ILocationPayload) => {
       }
 
       return {
-        name: (driver.user as any).name || null,
-        email: (driver.user as any).email || null,
-        phoneNumber: (driver.user as any).phoneNumber || null,
-        location: locationString,
+        name: (driver.user as any).name || "Not Available",
+        email: (driver.user as any).email || "Not Available",
+        phoneNumber: (driver.user as any).phoneNumber || "Not Available",
+        location: locationString || "Not Available",
       };
     })
   );

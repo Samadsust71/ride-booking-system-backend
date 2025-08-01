@@ -1,0 +1,506 @@
+{
+	"info": {
+		"_postman_id": "088b192c-3dd8-44b9-99a5-0299ebbeebf3",
+		"name": "Ride Booking System",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "40154941"
+	},
+	"item": [
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "create a user",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"Samad\",\r\n    \"email\": \"samad@gmail.com\",\r\n    \"password\": \"Samad1234@\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:5000/api/v1/users/register"
+					},
+					"response": []
+				},
+				{
+					"name": "get all user",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"Samad\",\r\n    \"email\": \"samad@gmail.com\",\r\n    \"password\": \"Samad1234@\"\r\n}"
+						},
+						"url": "http://localhost:5000/api/v1/users/all-users"
+					},
+					"response": []
+				},
+				{
+					"name": "update user",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2ODg5ZDMzZTBkOGFkOTE0YjYyOWE1MDAiLCJlbWFpbCI6InNhbWFkQGdtYWlsLmNvbSIsInJvbGUiOiJSSURFUiIsImlhdCI6MTc1Mzg2NDE0NywiZXhwIjoxNzUzOTUwNTQ3fQ.A4nvh_4MGffzRBx-P8tLgScFzi1XZWu-diUS-M0as5c",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"Samad\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{baseurl}}/api/v1/users/6889d33e0d8ad914b629a500"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    // rider\r\n    // \"email\": \"samad@gmail.com\",\r\n    // \"password\": \"Samad12\"\r\n    // driver\r\n    // \"email\": \"samad3@gmail.com\",\r\n    // \"password\": \"Samad12\"\r\n    // super admin\r\n    \"email\": \"superadmin@gmail.com\",\r\n    \"password\": \"12345678\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{baseurl}}/api/v1/auth/login"
+					},
+					"response": []
+				},
+				{
+					"name": "Logout",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"samad@gmail.com\",\r\n    \"password\": \"Samad12\"\r\n    // \"email\": \"superadmin@gmail.com\",\r\n    // \"password\": \"12345678\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{baseurl}}/api/v1/auth/logout"
+					},
+					"response": []
+				},
+				{
+					"name": "Refresh Token",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"samad@gmail.com\",\r\n    \"password\": \"Samad12\"\r\n    // \"email\": \"superadmin@gmail.com\",\r\n    // \"password\": \"12345678\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{baseurl}}/api/v1/auth/logout"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Ride",
+			"item": [
+				{
+					"name": "Request Ride",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2ODhiYTAyMmQ5OGRlOTI2MDM3YzNiMzgiLCJlbWFpbCI6InNhbWFkQGdtYWlsLmNvbSIsInJvbGUiOiJSSURFUiIsImlhdCI6MTc1Mzk4MTI5NywiZXhwIjoxNzU0MDY3Njk3fQ.Yj0apgnoPooLd6Hc2xGKFJczgORgJu8zaAdWWyoqVT4",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"pickupLocation\":\"amborkhana,Sylhet\",\r\n    \"destinationLocation\":\"subidbazar,sylhet\"\r\n   \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:5000/api/v1/rides/request"
+					},
+					"response": []
+				},
+				{
+					"name": "Cancel Ride",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2ODhiYTAyMmQ5OGRlOTI2MDM3YzNiMzgiLCJlbWFpbCI6InNhbWFkQGdtYWlsLmNvbSIsInJvbGUiOiJSSURFUiIsImlhdCI6MTc1Mzk4MTI5NywiZXhwIjoxNzU0MDY3Njk3fQ.Yj0apgnoPooLd6Hc2xGKFJczgORgJu8zaAdWWyoqVT4",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": "http://localhost:5000/api/v1/rides/688bb6179300f89e8ea38d4f/cancel"
+					},
+					"response": []
+				},
+				{
+					"name": "Get My Rides",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2ODhiYTAyMmQ5OGRlOTI2MDM3YzNiMzgiLCJlbWFpbCI6InNhbWFkQGdtYWlsLmNvbSIsInJvbGUiOiJSSURFUiIsImlhdCI6MTc1Mzk4MTI5NywiZXhwIjoxNzU0MDY3Njk3fQ.Yj0apgnoPooLd6Hc2xGKFJczgORgJu8zaAdWWyoqVT4",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"pickupLocation\":\"amborkhana,Sylhet\",\r\n    \"destinationLocation\":\"subidbazar,sylhet\"\r\n   \r\n}"
+						},
+						"url": "http://localhost:5000/api/v1/rides/me"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Rides Using _id",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "Ride Feedback",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2ODhiYTAyMmQ5OGRlOTI2MDM3YzNiMzgiLCJlbWFpbCI6InNhbWFkQGdtYWlsLmNvbSIsInJvbGUiOiJSSURFUiIsImlhdCI6MTc1Mzk4MTI5NywiZXhwIjoxNzU0MDY3Njk3fQ.Yj0apgnoPooLd6Hc2xGKFJczgORgJu8zaAdWWyoqVT4",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"rating\":3,\r\n    \"feedback\":\"Very Good Driver enjpyed the ride\"\r\n   \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:5000/api/v1/rides/688bf4ea35e57ff023efbb3c/feedback"
+					},
+					"response": []
+				},
+				{
+					"name": "Find Nearby Driver",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Driver",
+			"item": [
+				{
+					"name": "Request for Driving",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2ODhiZGNiZDhkYmRiNGU4OGZkM2Q4NzgiLCJlbWFpbCI6InNhbWFkMUBnbWFpbC5jb20iLCJyb2xlIjoiUklERVIiLCJpYXQiOjE3NTM5OTY1MzYsImV4cCI6MTc1NDA4MjkzNn0.3haPONkJCNavEDr4y_EyNcAjv-SZOWjeVq43igT2zGQ",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"vehicleType\":\"4 Wheeler\",\r\n    \"vehicleModel\":\"bogati\",\r\n    \"vehicleNumber\":\"1234\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:5000/api/v1/drivers/apply-driver"
+					},
+					"response": []
+				},
+				{
+					"name": "Accept a Ride",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2ODhiZGNiZDhkYmRiNGU4OGZkM2Q4NzgiLCJlbWFpbCI6InNhbWFkMUBnbWFpbC5jb20iLCJyb2xlIjoiRFJJVkVSIiwiaWF0IjoxNzUzOTk5NDg1LCJleHAiOjE3NTQwODU4ODV9.qsfamL_nC28LRS7EhZRstrNvdxcuS6AwXbijq2CUsus",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"vehicleType\":\"4 Wheeler\",\r\n    \"vehicleModel\":\"bogati\",\r\n    \"vehicleNumber\":\"1234\"\r\n}"
+						},
+						"url": "http://localhost:5000/api/v1/drivers/688bb999fb739c5306732255/accept"
+					},
+					"response": []
+				},
+				{
+					"name": "Update Ride Status",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2ODhiZGNiZDhkYmRiNGU4OGZkM2Q4NzgiLCJlbWFpbCI6InNhbWFkMUBnbWFpbC5jb20iLCJyb2xlIjoiRFJJVkVSIiwiaWF0IjoxNzUzOTk5NDg1LCJleHAiOjE3NTQwODU4ODV9.qsfamL_nC28LRS7EhZRstrNvdxcuS6AwXbijq2CUsus",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"vehicleType\":\"4 Wheeler\",\r\n    \"vehicleModel\":\"bogati\",\r\n    \"vehicleNumber\":\"1234\"\r\n}"
+						},
+						"url": "http://localhost:5000/api/v1/drivers/688bb999fb739c5306732255/status"
+					},
+					"response": []
+				},
+				{
+					"name": "Reject a Ride",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2ODhiZGNiZDhkYmRiNGU4OGZkM2Q4NzgiLCJlbWFpbCI6InNhbWFkMUBnbWFpbC5jb20iLCJyb2xlIjoiRFJJVkVSIiwiaWF0IjoxNzUzOTk5NDg1LCJleHAiOjE3NTQwODU4ODV9.qsfamL_nC28LRS7EhZRstrNvdxcuS6AwXbijq2CUsus",
+								"type": "text"
+							}
+						],
+						"url": "http://localhost:5000/api/v1/drivers/688bb999fb739c5306732255/reject"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Available Rides",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "Earing History",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2ODhiZGNiZDhkYmRiNGU4OGZkM2Q4NzgiLCJlbWFpbCI6InNhbWFkMUBnbWFpbC5jb20iLCJyb2xlIjoiRFJJVkVSIiwiaWF0IjoxNzUzOTk5NDg1LCJleHAiOjE3NTQwODU4ODV9.qsfamL_nC28LRS7EhZRstrNvdxcuS6AwXbijq2CUsus",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:5000/api/v1/drivers/earing-history",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v1",
+								"drivers",
+								"earing-history"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": null,
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Admin",
+			"item": [
+				{
+					"name": "Approve Driver",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2ODhiYTAwOWQ5OGRlOTI2MDM3YzNiMzUiLCJlbWFpbCI6InN1cGVyYWRtaW5AZ21haWwuY29tIiwicm9sZSI6IlNVUEVSX0FETUlOIiwiaWF0IjoxNzUzOTk5NDIwLCJleHAiOjE3NTQwODU4MjB9.sloxfb0qRk5thuS4y_NbWRpZqRXnEt80KBo-G_jjc7g",
+								"type": "text"
+							}
+						],
+						"url": "http://localhost:5000/api/v1/admin/driver/approve/688bdf43593e495e21615438"
+					},
+					"response": []
+				},
+				{
+					"name": "Admin Report",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2ODhiYTAwOWQ5OGRlOTI2MDM3YzNiMzUiLCJlbWFpbCI6InN1cGVyYWRtaW5AZ21haWwuY29tIiwicm9sZSI6IlNVUEVSX0FETUlOIiwiaWF0IjoxNzU0MDA1OTgzLCJleHAiOjE3NTQwOTIzODN9.8aR_XQzrtAUdKbt30h8JztEjWhT7p1pEEQwCX2JbOWQ",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"rating\":3,\r\n    \"feedback\":\"Very Good Driver enjpyed the ride\"\r\n   \r\n}"
+						},
+						"url": "http://localhost:5000/api/v1/admin/report"
+					},
+					"response": []
+				},
+				{
+					"name": "Get All User",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2ODhiYTAwOWQ5OGRlOTI2MDM3YzNiMzUiLCJlbWFpbCI6InN1cGVyYWRtaW5AZ21haWwuY29tIiwicm9sZSI6IlNVUEVSX0FETUlOIiwiaWF0IjoxNzU0MDMwMzAyLCJleHAiOjE3NTQxMTY3MDJ9.35uomhkckagtMCIKcy0kciPYGvio7UFT2VlwDoEMK8g",
+								"type": "text"
+							}
+						],
+						"url": "{{baseurl}}/api/v1/admin/users"
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Driver",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2ODhiYTAwOWQ5OGRlOTI2MDM3YzNiMzUiLCJlbWFpbCI6InN1cGVyYWRtaW5AZ21haWwuY29tIiwicm9sZSI6IlNVUEVSX0FETUlOIiwiaWF0IjoxNzU0MDMwMzAyLCJleHAiOjE3NTQxMTY3MDJ9.35uomhkckagtMCIKcy0kciPYGvio7UFT2VlwDoEMK8g",
+								"type": "text"
+							}
+						],
+						"url": "{{baseurl}}/api/v1/admin/drivers"
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Ride",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2ODhiYTAwOWQ5OGRlOTI2MDM3YzNiMzUiLCJlbWFpbCI6InN1cGVyYWRtaW5AZ21haWwuY29tIiwicm9sZSI6IlNVUEVSX0FETUlOIiwiaWF0IjoxNzU0MDMwMzAyLCJleHAiOjE3NTQxMTY3MDJ9.35uomhkckagtMCIKcy0kciPYGvio7UFT2VlwDoEMK8g",
+								"type": "text"
+							}
+						],
+						"url": "{{baseurl}}/api/v1/admin/rides"
+					},
+					"response": []
+				},
+				{
+					"name": "Suspend a Driver",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2ODhiYTAwOWQ5OGRlOTI2MDM3YzNiMzUiLCJlbWFpbCI6InN1cGVyYWRtaW5AZ21haWwuY29tIiwicm9sZSI6IlNVUEVSX0FETUlOIiwiaWF0IjoxNzU0MDMwMzAyLCJleHAiOjE3NTQxMTY3MDJ9.35uomhkckagtMCIKcy0kciPYGvio7UFT2VlwDoEMK8g",
+								"type": "text"
+							}
+						],
+						"url": "{{baseurl}}/api/v1/admin/driver/suspend/688c5a9f22c3e33a79415362"
+					},
+					"response": []
+				},
+				{
+					"name": "Block a User",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2ODhiYTAwOWQ5OGRlOTI2MDM3YzNiMzUiLCJlbWFpbCI6InN1cGVyYWRtaW5AZ21haWwuY29tIiwicm9sZSI6IlNVUEVSX0FETUlOIiwiaWF0IjoxNzU0MDMwMzAyLCJleHAiOjE3NTQxMTY3MDJ9.35uomhkckagtMCIKcy0kciPYGvio7UFT2VlwDoEMK8g",
+								"type": "text"
+							}
+						],
+						"url": "{{baseurl}}/api/v1/admin/driver/suspend/688c5a9f22c3e33a79415362"
+					},
+					"response": []
+				},
+				{
+					"name": "unblock a User",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2ODhiYTAwOWQ5OGRlOTI2MDM3YzNiMzUiLCJlbWFpbCI6InN1cGVyYWRtaW5AZ21haWwuY29tIiwicm9sZSI6IlNVUEVSX0FETUlOIiwiaWF0IjoxNzU0MDMwMzAyLCJleHAiOjE3NTQxMTY3MDJ9.35uomhkckagtMCIKcy0kciPYGvio7UFT2VlwDoEMK8g",
+								"type": "text"
+							}
+						],
+						"url": "{{baseurl}}/api/v1/admin/driver/suspend/688c5a9f22c3e33a79415362"
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "baseurl",
+			"value": "https://ride-booking-system-backend-blond.vercel.app",
+			"type": "default"
+		}
+	]
+}

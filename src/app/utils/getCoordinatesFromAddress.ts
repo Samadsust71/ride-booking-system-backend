@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import axios from "axios";
 import AppError from "../errorHelpers/AppError";
@@ -19,7 +20,7 @@ export const getCoordinatesFromAddress = async (address: string) => {
       lng: parseFloat(data[0].lon),
     };
   } catch (error: any) {
-    throw new AppError(400, `Error fetching coordinates: ${error.message}`);
+    throw new AppError(400, `Failed to get coordinates. Are you sure it's a valid address?`);
   }
 };
 
@@ -36,6 +37,6 @@ export const getReadableAddressFromCoordinates = async (lat: number, lng: number
 
     return data.display_name;
   } catch (error: any) {
-    throw new AppError(400, `Error fetching address: ${error.message}`);
+    throw new AppError(400, `Failed to get address. Are you sure it's a valid address?`);
   }
 };

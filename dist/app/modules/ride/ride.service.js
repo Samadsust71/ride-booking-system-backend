@@ -166,10 +166,10 @@ const findNearbyDrivers = (payload) => __awaiter(void 0, void 0, void 0, functio
             locationString = yield (0, getCoordinatesFromAddress_1.getReadableAddressFromCoordinates)(lat, lng);
         }
         return {
-            name: driver.user.name || null,
-            email: driver.user.email || null,
-            phoneNumber: driver.user.phoneNumber || null,
-            location: locationString,
+            name: driver.user.name || "Not Available",
+            email: driver.user.email || "Not Available",
+            phoneNumber: driver.user.phoneNumber || "Not Available",
+            location: locationString || "Not Available",
         };
     })));
     return formattedDrivers;

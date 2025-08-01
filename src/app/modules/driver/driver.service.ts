@@ -18,11 +18,11 @@ const applyToBeDriver = async (userId: string, payload: Partial<IDriver>) => {
   if (!payload.drivingLocation ) {
     throw new AppError(
       httpStatus.BAD_REQUEST,
-      "Driving Location is required"
+      "'drivingLocation' is required"
     );
   } 
   const coordinates = await getCoordinatesFromAddress(payload.drivingLocation);
-  
+
   const newDriver = await Driver.create({
     user: userId,
     vehicleType: payload.vehicleType,
