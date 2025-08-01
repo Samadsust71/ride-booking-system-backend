@@ -1,25 +1,16 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import fetch from "node-fetch";
+import axios from "axios";
 import AppError from "../errorHelpers/AppError";
 import { envVars } from "../config/env.config";
 
+// Address → Coordinates
 export const getCoordinatesFromAddress = async (address: string) => {
   try {
-    const url = `${envVars.NOMINATIM_BASE_URL}=${encodeURIComponent(address)}`;
+    const url = `https://us1.locationiq.com/v1/search?key=${envVars.LOCATIONIQ_API_KEY}&q=${encodeURIComponent(address)}&format=json`;
 
-    const res = await fetch(url, {
-      headers: {
-        "User-Agent": envVars.GOOGLE_MAPS_USER_AGENT || "ride-booking-app",
-      },
-    });
+    const { data } = await axios.get(url);
 
-    if (!res.ok) {
-      throw new Error(`Failed to fetch. Status: ${res.status}`);
-    }
-
-    const data: any = await res.json();
-
-    if (!Array.isArray(data) || data.length === 0) {
+    if (!Array.isArray(data) || !data.length) {
       throw new Error("Address not found");
     }
 
@@ -32,27 +23,18 @@ export const getCoordinatesFromAddress = async (address: string) => {
   }
 };
 
+// Coordinates → Address
 export const getReadableAddressFromCoordinates = async (lat: number, lng: number) => {
   try {
-    const url = `${envVars.NOMINATIM_REVERSE_URL}?lat=${lat}&lon=${lng}&format=json`;
+    const url = `https://us1.locationiq.com/v1/reverse?key=${envVars.LOCATIONIQ_API_KEY}&lat=${lat}&lon=${lng}&format=json`;
 
-    const res = await fetch(url, {
-      headers: {
-        "User-Agent": envVars.GOOGLE_MAPS_USER_AGENT || "ride-booking-app",
-      },
-    });
-
-    if (!res.ok) {
-      throw new Error(`Failed to fetch address. Status: ${res.status}`);
-    }
-
-    const data: any = await res.json();
+    const { data } = await axios.get(url);
 
     if (!data.display_name) {
       throw new Error("Address not found");
     }
 
-    return data.display_name; 
+    return data.display_name;
   } catch (error: any) {
     throw new AppError(400, `Error fetching address: ${error.message}`);
   }

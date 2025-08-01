@@ -26,6 +26,8 @@ interface EnvConfig {
   NOMINATIM_BASE_URL:string;
   NOMINATIM_REVERSE_URL:string
   GOOGLE_MAPS_USER_AGENT:string;
+  GOOGLE_MAPS_API_KEY:string
+  LOCATIONIQ_API_KEY:string
 
  
 }
@@ -55,6 +57,8 @@ const requiredEnvVariables: (keyof EnvConfig)[] = [
   "NOMINATIM_BASE_URL",
   "NOMINATIM_REVERSE_URL",
   "GOOGLE_MAPS_USER_AGENT",
+  "GOOGLE_MAPS_API_KEY",
+  "LOCATIONIQ_API_KEY"
   
 ];
 

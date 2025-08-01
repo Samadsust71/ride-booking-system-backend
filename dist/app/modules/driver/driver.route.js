@@ -1,0 +1,17 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.DriverRoutes = void 0;
+const express_1 = require("express");
+const checkAuth_1 = require("../../middlewares/checkAuth");
+const driver_controller_1 = require("./driver.controller");
+const driver_validation_1 = require("./driver.validation");
+const user_interface_1 = require("../user/user.interface");
+const validateRequest_1 = require("../../middlewares/validateRequest");
+const router = (0, express_1.Router)();
+router.post("/apply-driver", (0, checkAuth_1.checkAuth)(user_interface_1.UserRole.RIDER), (0, validateRequest_1.validateRequest)(driver_validation_1.createDriverZodSchema), driver_controller_1.DriverController.applyToBeDriver);
+router.get("/available-rides", (0, checkAuth_1.checkAuth)(user_interface_1.UserRole.DRIVER), driver_controller_1.DriverController.getAvailableRides);
+router.get("/earing-history", (0, checkAuth_1.checkAuth)(user_interface_1.UserRole.DRIVER), driver_controller_1.DriverController.getEaringHistory);
+router.patch("/:id/accept", (0, checkAuth_1.checkAuth)(user_interface_1.UserRole.DRIVER), driver_controller_1.DriverController.acceptRide);
+router.patch("/:id/reject", (0, checkAuth_1.checkAuth)(user_interface_1.UserRole.DRIVER), driver_controller_1.DriverController.rejectRide);
+router.patch("/:id/status", (0, checkAuth_1.checkAuth)(user_interface_1.UserRole.DRIVER), driver_controller_1.DriverController.updateRideStatus);
+exports.DriverRoutes = router;
