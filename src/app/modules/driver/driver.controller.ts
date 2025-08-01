@@ -83,17 +83,17 @@ export const updateRideStatus = catchAsync(async (req: Request, res: Response) =
 });
 
 
-const getRideHistory = catchAsync(async (req: Request, res: Response) => {
+const getEaringHistory = catchAsync(async (req: Request, res: Response) => {
   const user = req.user;
 
   const {userId} = user as JwtPayload;
 
-  const result = await DriverService.getRideHistory(userId);
+  const result = await DriverService.getEaringHistory(userId);
 
   sendResponse(res, {
     statusCode: httpStatus.OK,
     success: true,
-    message: "Ride history retrieved successfully",
+    message: "Earing history retrieved successfully",
     data: result,
   });
 });
@@ -106,5 +106,5 @@ export const DriverController = {
   acceptRide,
   rejectRide,
   updateRideStatus,
-  getRideHistory,
+  getEaringHistory,
 };

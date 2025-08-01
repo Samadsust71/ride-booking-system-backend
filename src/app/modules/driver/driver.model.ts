@@ -1,11 +1,11 @@
-import { Schema, model } from 'mongoose';
-import { IDriver, IsApprove, IsAvailable } from './driver.interface';
+import { Schema, model } from "mongoose";
+import { IDriver, IsApprove, IsAvailable } from "./driver.interface";
 
 const driverSchema = new Schema<IDriver>(
   {
     user: {
       type: Schema.Types.ObjectId,
-      ref: 'User',
+      ref: "User",
       required: true,
       unique: true,
     },
@@ -14,7 +14,7 @@ const driverSchema = new Schema<IDriver>(
       required: true,
     },
     vehicleModel: {
-      type: String
+      type: String,
     },
     vehicleNumber: {
       type: String,
@@ -30,6 +30,17 @@ const driverSchema = new Schema<IDriver>(
       enum: IsAvailable,
       default: IsAvailable.OFFLINE,
     },
+    drivingLocation:{type:String},
+    location: {
+      type: {
+        type: String,
+        enum: ["Point"],
+        default: "Point"
+      },
+      coordinates: {
+        type: [Number]
+      },
+    },
     earnings: {
       type: Number,
       default: 0,
@@ -37,8 +48,8 @@ const driverSchema = new Schema<IDriver>(
   },
   {
     timestamps: true,
-    versionKey: false
+    versionKey: false,
   }
 );
-
-export const Driver = model<IDriver>('Driver', driverSchema);
+driverSchema.index({ location: '2dsphere' });
+export const Driver = model<IDriver>("Driver", driverSchema);

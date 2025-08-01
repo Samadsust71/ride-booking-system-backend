@@ -41,14 +41,9 @@ const userSchema = new Schema<IUser>(
     isDeleted: { type: Boolean, default: false },
     auths: [authProviderSchema],
     isVerified: { type: Boolean, default: false },
-    // rides: [{ type: Schema.Types.ObjectId, ref: "Ride" }],
   },
   { timestamps: true, versionKey: false }
 );
 
-/**
- * Index for fast driver search (optional but recommended)
- */
-// userSchema.index({ role: 1, "driverInfo.isOnline": 1 });
 
 export const User = model<IUser>("User", userSchema);

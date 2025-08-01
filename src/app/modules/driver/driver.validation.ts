@@ -8,4 +8,7 @@ export const createDriverZodSchema = z.object({
   vehicleNumber: z.string({
     message: "Vehicle number is required",
   }),
+  drivingLocation: z.string({
+    message: "Driving Location Required",
+  }),
 });

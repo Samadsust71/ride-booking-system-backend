@@ -22,6 +22,12 @@ export interface IDriver {
 
   approvalStatus: IsApprove;
   availabilityStatus: IsAvailable;
+  drivingLocation?:string
+
+  location: {
+  type: "Point";
+  coordinates: [number, number]; // [lng, lat]
+};
 
   earnings: number;
 

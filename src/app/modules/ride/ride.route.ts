@@ -12,6 +12,7 @@ router.post("/request", checkAuth(UserRole.RIDER, UserRole.ADMIN, UserRole.SUPER
  validateRequest(createRideZodSchema),
   RideController.createRide)
   router.get("/me", checkAuth(UserRole.RIDER), RideController.getMyRides)
+  router.post("/nearby-drivers",checkAuth(UserRole.RIDER), RideController.findNearbyDrivers)
   router.get("/:id", checkAuth(UserRole.RIDER), RideController.getSingleRide)
   router.patch("/:id/cancel", checkAuth(UserRole.RIDER), RideController.cancelRide)
   router.patch("/:id/feedback", checkAuth(UserRole.RIDER), RideController.feedbackRide);

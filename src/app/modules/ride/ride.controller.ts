@@ -93,10 +93,26 @@ const feedbackRide= catchAsync(
     });
   }
 )
+
+const findNearbyDrivers = catchAsync(
+  async(req: Request, res: Response, next: NextFunction)=>{
+    const payload = req.body
+    const result = await RideService.findNearbyDrivers(payload)
+
+     sendResponse(res, {
+      success: true,
+      statusCode: httpStatus.OK,
+      message: 'Driver nearby retrieved successfully',
+      data: result,
+    });
+  }
+)
+
 export const RideController = {
   createRide,
   cancelRide,
   getMyRides,
   getSingleRide,
-  feedbackRide
+  feedbackRide,
+  findNearbyDrivers
 };

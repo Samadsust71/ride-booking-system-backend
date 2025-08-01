@@ -4,6 +4,7 @@ import AppError from "../../errorHelpers/AppError";
 import httpStatus from "http-status-codes";
 import { Ride } from "../ride/ride.model";
 import { RideStatus } from "../ride/ride.interface";
+import { getCoordinatesFromAddress } from "../../utils/getCoordinatesFromAddress";
 
 const applyToBeDriver = async (userId: string, payload: Partial<IDriver>) => {
   const isAlreadyDriver = await Driver.findOne({ user: userId });
@@ -14,7 +15,14 @@ const applyToBeDriver = async (userId: string, payload: Partial<IDriver>) => {
       "You have already applied or are already a driver."
     );
   }
-
+  if (!payload.drivingLocation ) {
+    throw new AppError(
+      httpStatus.BAD_REQUEST,
+      "Driving Location is required"
+    );
+  } 
+  const coordinates = await getCoordinatesFromAddress(payload.drivingLocation);
+  
   const newDriver = await Driver.create({
     user: userId,
     vehicleType: payload.vehicleType,
@@ -22,6 +30,10 @@ const applyToBeDriver = async (userId: string, payload: Partial<IDriver>) => {
     vehicleModel: payload?.vehicleModel || "N/A",
     approvalStatus: IsApprove.PENDING,
     availabilityStatus: IsAvailable.ONLINE,
+    location: {
+      type: 'Point',
+      coordinates: [coordinates.lng, coordinates.lat],
+    },
   });
 
   return newDriver;
@@ -190,21 +202,20 @@ const updateRideStatus = async (rideId: string, driverUserId: string) => {
   return ride;
 };
 
-const getRideHistory = async (userId: string) => {
+const getEaringHistory = async (userId: string) => {
   const driver = await Driver.findOne({ user: userId });
 
   if (!driver) {
     throw new AppError(httpStatus.NOT_FOUND, "Driver not found");
   }
 
-  const rides = await Ride.find({ driver: driver._id }).sort({ createdAt: -1 });
+  const rides = await Ride.find({ driver: driver._id }).sort({ createdAt: -1 }).countDocuments();
 
   const totalEarnings = driver.earnings;
 
   return {
-    totalRides: rides.length,
+    totalRides: rides,
     totalEarnings,
-    rides,
   };
 };
 
@@ -214,5 +225,5 @@ export const DriverService = {
   acceptRide,
   rejectRide,
   updateRideStatus,
-  getRideHistory,
+  getEaringHistory,
 };

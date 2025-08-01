@@ -91,34 +91,91 @@ const getAllRides = async () => {
 };
 
 export const generateAdminReport = async (): Promise<IAdminReport> => {
+  const totalUsersPromise = User.countDocuments();
+  const totalDriversPromise = Driver.countDocuments();
+  const totalRidesPromise = Ride.countDocuments();
+  const totalCompletedRidesPromise = Ride.countDocuments({
+    status: RideStatus.COMPLETED,
+  });
+  const totalOngoingRidesPromise = Ride.countDocuments({
+    status: { $in: [RideStatus.PICKED_UP, RideStatus.IN_TRANSIT] },
+  });
+
+  const earningsDataPromise = Ride.aggregate([
+    { $match: { status: RideStatus.COMPLETED } },
+    { $group: { _id: null, total: { $sum: "$fare" } } },
+  ]);
+  const topFiveDriversPromise = Ride.aggregate([
+    {
+      $match: {
+        rating: { $ne: null },
+        status: RideStatus.COMPLETED,
+      },
+    },
+    {
+      $group: {
+        _id: "$driver",
+        avgRating: { $avg: "$rating" },
+        totalRides: { $sum: 1 },
+      },
+    },
+    { $sort: { avgRating: -1, totalRides: -1 } },
+    { $limit: 5 },
+    {
+      $lookup: {
+        from: "drivers",
+        localField: "_id",
+        foreignField: "_id",
+        as: "driverProfile",
+      },
+    },
+    { $unwind: "$driverProfile" },
+    {
+      $lookup: {
+        from: "users",
+        localField: "driverProfile.user",
+        foreignField: "_id",
+        as: "driverInfo",
+      },
+    },
+    { $unwind: "$driverInfo" },
+    {
+      $project: {
+        _id: 0,
+        driverId: "$_id",
+        name: "$driverInfo.name",
+        email: "$driverInfo.email",
+        avgRating: 1,
+        totalRides: 1,
+      },
+    },
+  ]);
   const [
     totalUsers,
     totalDrivers,
     totalRides,
-    completedRides,
-    ongoingRides,
+    totalCompletedRides,
+    totalOngoingRides,
     earningsData,
+    topFiveDrivers,
   ] = await Promise.all([
-    User.countDocuments(),
-    Driver.countDocuments(),
-    Ride.countDocuments(),
-    Ride.countDocuments({ status: RideStatus.COMPLETED }),
-    Ride.countDocuments({
-      status: { $in: [RideStatus.PICKED_UP, RideStatus.IN_TRANSIT] },
-    }),
-    Ride.aggregate([
-      { $match: { status: RideStatus.COMPLETED } },
-      { $group: { _id: null, total: { $sum: "$fare" } } },
-    ]),
+    totalUsersPromise,
+    totalDriversPromise,
+    totalRidesPromise,
+    totalCompletedRidesPromise,
+    totalOngoingRidesPromise,
+    earningsDataPromise,
+    topFiveDriversPromise,
   ]);
 
   return {
     totalUsers,
     totalDrivers,
     totalRides,
-    completedRides,
-    ongoingRides,
+    totalCompletedRides,
+    totalOngoingRides,
     totalEarnings: earningsData[0]?.total || 0,
+    topFiveDrivers,
   };
 };
 
