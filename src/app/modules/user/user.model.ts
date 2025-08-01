@@ -1,9 +1,7 @@
 import { model, Schema } from "mongoose";
 import {
   AccountStatus,
-  DriverApprovalStatus,
   IAuthProvider,
-  IDriverInfo,
   IUser,
   UserRole,
 } from "./user.interface";
@@ -17,20 +15,6 @@ const authProviderSchema = new Schema<IAuthProvider>(
     versionKey: false,
     _id: false,
   }
-);
-
-const driverInfoSchema = new Schema<IDriverInfo>(
-  {
-    approvalStatus: {
-      type: String,
-      enum: Object.values(DriverApprovalStatus),
-      default: DriverApprovalStatus.PENDING,
-    },
-    isOnline: { type: Boolean, default: false },
-    vehicleId: { type: Schema.Types.ObjectId, ref: "Vehicle" },
-    totalEarnings: { type: Number, default: 0 },
-  },
-  { _id: false, versionKey: false }
 );
 
 /**
@@ -47,7 +31,7 @@ const userSchema = new Schema<IUser>(
     role: {
       type: String,
       enum: Object.values(UserRole),
-      default: UserRole.RIDER
+      default: UserRole.RIDER,
     },
     status: {
       type: String,
@@ -57,14 +41,9 @@ const userSchema = new Schema<IUser>(
     isDeleted: { type: Boolean, default: false },
     auths: [authProviderSchema],
     isVerified: { type: Boolean, default: false },
-    driverInfo: { type: driverInfoSchema, required: false }
   },
   { timestamps: true, versionKey: false }
 );
 
-/**
- * Index for fast driver search (optional but recommended)
- */
-// userSchema.index({ role: 1, "driverInfo.isOnline": 1 });
 
 export const User = model<IUser>("User", userSchema);
