@@ -64,19 +64,8 @@ const updateUser = async (userId: string, payload: Partial<IUser>, decodedToken:
 }
 
 
-const getAllUsers = async () => {
-    const users = await User.find({});
-    const totalUsers = await User.countDocuments();
-    return {
-        data: users,
-        meta: {
-            total: totalUsers
-        }
-    }
-};
 
 export const UserServices = {
     createUser,
-     updateUser,
-    getAllUsers
+     updateUser
 }

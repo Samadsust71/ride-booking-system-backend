@@ -68,18 +68,7 @@ const updateUser = (userId, payload, decodedToken) => __awaiter(void 0, void 0, 
     const newUpdatedUser = yield user_model_1.User.findByIdAndUpdate(userId, payload, { new: true, runValidators: true });
     return newUpdatedUser;
 });
-const getAllUsers = () => __awaiter(void 0, void 0, void 0, function* () {
-    const users = yield user_model_1.User.find({});
-    const totalUsers = yield user_model_1.User.countDocuments();
-    return {
-        data: users,
-        meta: {
-            total: totalUsers
-        }
-    };
-});
 exports.UserServices = {
     createUser,
-    updateUser,
-    getAllUsers
+    updateUser
 };

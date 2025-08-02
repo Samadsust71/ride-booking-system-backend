@@ -28,22 +28,6 @@
 					"response": []
 				},
 				{
-					"name": "get all user",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"method": "GET",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"name\":\"Samad\",\r\n    \"email\": \"samad@gmail.com\",\r\n    \"password\": \"Samad1234@\"\r\n}"
-						},
-						"url": "http://localhost:5000/api/v1/users/all-users"
-					},
-					"response": []
-				},
-				{
 					"name": "update user",
 					"request": {
 						"method": "PATCH",

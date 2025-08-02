@@ -32,21 +32,10 @@ const updateUser = catchAsync(async (req: Request, res: Response, next: NextFunc
         data: user,
     })
 })
-const getAllUsers = catchAsync(async (req: Request, res: Response, next: NextFunction) => {
-    const result = await UserServices.getAllUsers();
 
-    sendResponse(res, {
-        success: true,
-        statusCode: httpStatus.CREATED,
-        message: "All Users Retrieved Successfully",
-        data: result.data,
-        meta: result.meta
-    })
-})
 
 
 export const UserControllers = {
     createUser,
-    updateUser,
-    getAllUsers
+    updateUser
 }

@@ -81,6 +81,15 @@ https://ride-booking-system-backend-blond.vercel.app/api/v1
 
 ---
 
+## 🛡️ Super Admin Credentials
+
+A default **SUPER_ADMIN** account is pre-configured for platform-level control.
+
+Email: superadmin@gmail.com
+Password: 12345678
+
+---
+
 ## 📭 API Testing with Postman
 
 You can test all the backend API routes using the provided Postman collection.
@@ -104,6 +113,16 @@ This collection includes:
 
 ---
 
+## 🔁 API Versioning
+
+All routes are versioned and **prefixed with `/api/v1`** for consistency and future-proofing.
+
+Example:
+POST /api/v1/auth/login
+GET /api/v1/rides/me
+
+---
+
 ## 🔑 Auth Routes
 
 | Method | Endpoint           | Description         |
@@ -119,7 +138,6 @@ This collection includes:
 | Method | Endpoint             | Access          | Description         |
 |--------|----------------------|------------------|---------------------|
 | POST   | `/users/register`    | Public           | Register user       |
-| GET    | `/users/all-users`   | ADMIN            | Get all users       |
 | PATCH  | `/users/:id`         | Authenticated    | Update user         |
 
 ---
