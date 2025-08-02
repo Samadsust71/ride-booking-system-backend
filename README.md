@@ -85,8 +85,8 @@ https://ride-booking-system-backend-blond.vercel.app/api/v1
 
 A default **SUPER_ADMIN** account is pre-configured for platform-level control.
 
-Email: superadmin@gmail.com
-Password: 12345678
+- Email: superadmin@gmail.com
+- Password: 12345678
 
 ---
 
@@ -118,8 +118,8 @@ This collection includes:
 All routes are versioned and **prefixed with `/api/v1`** for consistency and future-proofing.
 
 Example:
-POST /api/v1/auth/login
-GET /api/v1/rides/me
+- POST /api/v1/auth/login
+- GET /api/v1/rides/me
 
 ---
 
